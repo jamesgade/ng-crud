@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserModel } from 'src/app/services/user/user.model';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ export class DashboardComponent implements OnInit {
   showAddButton: boolean;
   showUpdateButton: boolean;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.addUserForm = this.formBuilder.group({
@@ -101,8 +102,13 @@ export class DashboardComponent implements OnInit {
 
         this.addUserForm.reset();
         closeBtn?.click();
+        window.location.reload();
         this.getUserList();
     })
+  }
+
+  logout() {
+    this.router.navigate(['login']);
   }
 
 }

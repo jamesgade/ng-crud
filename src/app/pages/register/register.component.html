@@ -1,5 +1,12 @@
 <main class="page">
     <h1>User Registration</h1>
+    <app-form-builder [fields]="registerFormFields" (formValue)="register($event)" buttonLabel="Register"></app-form-builder>
+</main>
+
+
+
+<!-- <main class="page">
+    <h1>User Registration</h1>
     <form [formGroup]="userRegistrationForm" (ngSubmit)="register()" class="auth-form">
         <div class="form-field">
             <label for="firstName">First Name</label>
@@ -56,4 +63,4 @@
             <p>Already have an account? <a routerLink="/login">Login</a></p>
         </div>
     </form>
-</main>
+</main> -->

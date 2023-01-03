@@ -9,30 +9,108 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./register.component.scss']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  public userRegistrationForm: FormGroup;
+  registerFormFields = [
+    {
+      label: 'First Name',
+      type: 'text',
+      name: 'firstName'
+    },
+    {
+      label: 'Last Name',
+      type: 'text',
+      name: 'lastName'
+    },
+    {
+      label: 'Email',
+      type: 'email',
+      name: 'email'
+    },
+    {
+      label: 'Password',
+      type: 'password',
+      name: 'password'
+    },
+    {
+      label: 'Phone Number',
+      type: 'number',
+      name: 'Phone'
+    },
+    {
+      label: 'Is Adult?',
+      type: 'checkbox',
+      name: 'isOver18'
+    },
+    {
+      label: 'Select Gender',
+      type: 'radio',
+      name: 'gender',
+      options: [
+        {
+          label: 'Male',
+          value: 'male',
+          name: 'male'
+        },
+        {
+          label: 'Female',
+          value: 'female',
+          name: 'female'
+        }
+      ]
+    },
+    {
+      label: 'Occupation',
+      type: 'select',
+      name: 'occupation',
+      options: [
+        {
+          label: 'I am a student',
+          value: 'student'
+        },
+        {
+          label: 'Freelancer',
+          value: 'freelancer'
+        },
+        {
+          label: 'Self Employed',
+          value: 'self-employed'
+        },
+      ]
+    }
+  ]
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.userRegistrationForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      password: [''],
-      phone: [''],
-      isOver18: [''],
-      gender: ['']
-    })
-  }
-
-  register = () => {
-    this.authService.registerUser(this.userRegistrationForm.value)
+  register = (values: any) => {
+    this.authService.registerUser(values)
       .subscribe(response => {
-        this.userRegistrationForm.reset();
         this.router.navigate(['login']);
       })
   }
+
+  // public userRegistrationForm: FormGroup;
+
+  // constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
+
+  // ngOnInit(): void {
+  //   this.userRegistrationForm = this.formBuilder.group({
+  //     firstName: [''],
+  //     lastName: [''],
+  //     email: [''],
+  //     password: [''],
+  //     phone: [''],
+  //     isOver18: [''],
+  //     gender: ['']
+  //   })
+  // }
+
+  // register = () => {
+  //   this.authService.registerUser(this.userRegistrationForm.value)
+  //     .subscribe(response => {
+  //       this.userRegistrationForm.reset();
+  //       this.router.navigate(['login']);
+  //     })
+  // }
 
 }

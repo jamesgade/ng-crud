@@ -1,0 +1,50 @@
+<form [formGroup]="customForm" (ngSubmit)="onSubmit()" class="auth-form">
+
+    <div *ngFor="let field of fields" class="form-field">
+
+        <!-- input label -->
+        <label>{{field.label}}</label>
+
+        <!-- input type = text, email, password, number -->
+        <input [formControlName]="field.name" [type]="field.type"
+            *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'" class="form-input">
+
+        <!-- textarea -->
+        <textarea [formControlName]="field.name" *ngIf="field.type === 'textarea'"></textarea>
+
+        <!-- select dropdown -->
+        <select [formControlName]="field.name" *ngIf="field.type === 'select'" class="dropdown">
+            <option value="" disabled selected>Select an option</option>
+            <ng-container *ngFor="let option of field.options">
+                <option [value]="option.label">{{ option.label }}</option>
+            </ng-container>
+        </select>
+
+        <!-- checkbox -->
+        <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name" class="form-check">
+
+        <div *ngIf="field.type === 'radio'">
+            <div class="radios" *ngFor="let option of field.options">
+                <div class="flex">
+                    <label [for]="option.value">{{option.label}}</label>
+                    <input type="radio" [id]="option.value" [name]="field.name" [value]="option.label" class="form-radio" [formControlName]="field.name">
+                </div>
+            </div>
+        </div>
+
+        <!-- validation -->
+        <!-- <div *ngIf="field.name.invalid && field.name.touched">
+            {{getErrorMessage(field)}}
+        </div> -->
+
+    </div>
+
+    <!-- <button type="submit">Submit</button> -->
+    <div class="form-field">
+        <div class="button-container">
+            <button type="submit" class="button form-button">
+                {{buttonLabel}}
+            </button>
+        </div>
+    </div>
+</form>

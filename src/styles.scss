@@ -185,9 +185,17 @@ form {
         display: flex;
         justify-content: space-evenly;
     }
+
+    .dropdown{
+        padding: 10px;
+    }
 }
 
 .auth-form{
     width: 500px;
     margin-bottom: 25px;
+}
+
+.dashboard-footer{
+    margin: 30px 0;
 }
