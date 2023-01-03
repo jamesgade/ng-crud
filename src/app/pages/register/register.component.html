@@ -1,6 +1,9 @@
 <main class="page">
     <h1>User Registration</h1>
     <app-form-builder [fields]="registerFormFields" (formValue)="register($event)" buttonLabel="Register"></app-form-builder>
+    <div>
+        <p>Already have an account? <a routerLink="/login">Login</a></p>
+    </div>
 </main>
 
 
