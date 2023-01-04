@@ -16,11 +16,14 @@ export class LoginComponent {
       label: 'Email',
       type: 'email',
       name: 'email',
+      required: true,
     },
     {
       label: 'Password',
       type: 'password',
-      name: 'password'
+      name: 'password',
+      required: true,
+      minLength: 4
     }
   ];
 
@@ -37,9 +40,6 @@ export class LoginComponent {
         }
       })
   }
-
-
-
 
   // public userLoginForm: FormGroup;
 

@@ -19,16 +19,6 @@
       "phone": 123456789,
       "isOver18": true,
       "gender": "male"
-    },
-    {
-      "id": 3,
-      "firstName": "Chandra",
-      "lastName": "Maadala",
-      "email": "chandra@gmail.com",
-      "password": "123456",
-      "phone": 123456,
-      "isOver18": true,
-      "gender": "male"
     }
   ]
 }

@@ -7,7 +7,8 @@
 
         <!-- input type = text, email, password, number -->
         <input [formControlName]="field.name" [type]="field.type"
-            *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'" class="form-input">
+            *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'"
+            class="form-input" [style.border-color]="customForm.controls[field.name].invalid && (isSubmitting || customForm.controls[field.name].touched) ? 'red' : ''">
 
         <!-- textarea -->
         <textarea [formControlName]="field.name" *ngIf="field.type === 'textarea'"></textarea>
@@ -27,19 +28,47 @@
             <div class="radios" *ngFor="let option of field.options">
                 <div class="flex">
                     <label [for]="option.value">{{option.label}}</label>
-                    <input type="radio" [id]="option.value" [name]="field.name" [value]="option.label" class="form-radio" [formControlName]="field.name">
+                    <input type="radio" [id]="option.value" [name]="field.name" [value]="option.label"
+                        class="form-radio" [formControlName]="field.name">
                 </div>
             </div>
         </div>
 
-        <!-- validation -->
-        <!-- <div *ngIf="field.name.invalid && field.name.touched">
-            {{getErrorMessage(field)}}
-        </div> -->
+        <!-- validations -->
+        <!-- <h6>errors: {{customForm.controls[field.name].errors | json}}</h6> -->
+        <div style="height: 20px;">
+            <div
+                *ngIf="customForm.controls[field.name].invalid && (isSubmitting || customForm.controls[field.name]?.touched)">
 
+                <!-- required -->
+                <p *ngIf="customForm.controls[field.name].errors?.['required']" class="error-message">
+                    This is a required field.
+                </p>
+
+                <!-- minlength -->
+                <p *ngIf="customForm.controls[field.name].errors?.['minlength'] && customForm.controls[field.name].dirty"
+                    class="error-message">
+                    Minimum {{customForm.controls[field.name].errors?.['minlength'].requiredLength}} characters are
+                    needed.
+                </p>
+
+                <!-- maxlength -->
+                <p *ngIf="customForm.controls[field.name].errors?.['maxlength'] && customForm.controls[field.name].dirty"
+                    class="error-message">
+                    Maximum {{customForm.controls[field.name].errors?.['maxlength'].requiredLength}} characters are
+                    allowed.
+                </p>
+
+                <!--  -->
+                <p *ngIf="customForm.controls[field.name].errors?.['email'] && customForm.controls[field.name].dirty"
+                    class="error-message">
+                    Invalid email.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- <button type="submit">Submit</button> -->
+    <!-- submit button -->
     <div class="form-field">
         <div class="button-container">
             <button type="submit" class="button form-button">

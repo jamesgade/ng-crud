@@ -20,7 +20,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;;
+    padding: 20px 0;
+    ;
 
     .logo {
         font-size: 40px;
@@ -152,7 +153,7 @@ form {
     .form-field {
         display: flex;
         flex-direction: column;
-        margin: 20px 0;
+        margin: 10px 0;
         width: 80%;
 
         .button-container {
@@ -172,30 +173,41 @@ form {
         margin-top: 25px;
     }
 
-    .form-check{
+    .form-check {
         padding: 5px;
     }
 
-    .form-radio{
+    .form-radio {
         padding: 10px;
     }
 
-    .radios{
+    .radios {
         width: 50%;
         display: flex;
         justify-content: space-evenly;
     }
 
-    .dropdown{
+    .dropdown {
         padding: 10px;
     }
 }
 
-.auth-form{
+.auth-form {
     width: 500px;
     margin-bottom: 25px;
 }
 
-.dashboard-footer{
+.dashboard-footer {
     margin: 30px 0;
+}
+
+.invalid {
+    border: 1px solid red($color: #000000);
+}
+
+.error-message{
+    color: red;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
 }

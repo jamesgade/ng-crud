@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 export class DashboardComponent implements OnInit {
   users: any = [];
-  public addUserForm: FormGroup;
+  public dashboardForm: FormGroup;
   userModel: UserModel = new UserModel();
 
   showAddButton: boolean;
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.addUserForm = this.formBuilder.group({
+    this.dashboardForm = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
       email: [''],
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   clickAddNewUser() {
-    this.addUserForm.reset();
+    this.dashboardForm.reset();
     this.showAddButton = true;
     this.showUpdateButton = false;
   }
@@ -47,19 +47,19 @@ export class DashboardComponent implements OnInit {
   }
 
   add = () => {
-    this.userModel.firstName = this.addUserForm.value.firstName;
-    this.userModel.lastName = this.addUserForm.value.lastName;
-    this.userModel.email = this.addUserForm.value.email;
-    this.userModel.password = this.addUserForm.value.password;
-    this.userModel.phone = this.addUserForm.value.phone;
-    this.userModel.isOver18 = this.addUserForm.value.isOver18;
-    this.userModel.gender = this.addUserForm.value.gender;
+    this.userModel.firstName = this.dashboardForm.value.firstName;
+    this.userModel.lastName = this.dashboardForm.value.lastName;
+    this.userModel.email = this.dashboardForm.value.email;
+    this.userModel.password = this.dashboardForm.value.password;
+    this.userModel.phone = this.dashboardForm.value.phone;
+    this.userModel.isOver18 = this.dashboardForm.value.isOver18;
+    this.userModel.gender = this.dashboardForm.value.gender;
 
     this.userService.addUser(this.userModel)
       .subscribe((response: any) => {
         let closeBtn = document.getElementById('cancel');
 
-        this.addUserForm.reset();
+        this.dashboardForm.reset();
         closeBtn?.click();
         this.getUserList();
       })
@@ -78,29 +78,29 @@ export class DashboardComponent implements OnInit {
     this.showAddButton = false;
     this.showUpdateButton = true;
 
-    this.addUserForm.controls['firstName'].setValue(user.firstName);
-    this.addUserForm.controls['lastName'].setValue(user.lastName);
-    this.addUserForm.controls['email'].setValue(user.email);
-    this.addUserForm.controls['password'].setValue(user.password);
-    this.addUserForm.controls['phone'].setValue(user.phone);
-    this.addUserForm.controls['isOver18'].setValue(user.isOver18);
-    this.addUserForm.controls['gender'].setValue(user.gender);
+    this.dashboardForm.controls['firstName'].setValue(user.firstName);
+    this.dashboardForm.controls['lastName'].setValue(user.lastName);
+    this.dashboardForm.controls['email'].setValue(user.email);
+    this.dashboardForm.controls['password'].setValue(user.password);
+    this.dashboardForm.controls['phone'].setValue(user.phone);
+    this.dashboardForm.controls['isOver18'].setValue(user.isOver18);
+    this.dashboardForm.controls['gender'].setValue(user.gender);
   }
 
   update = () => {
-    this.userModel.firstName = this.addUserForm.value.firstName;
-    this.userModel.lastName = this.addUserForm.value.lastName;
-    this.userModel.email = this.addUserForm.value.email;
-    this.userModel.password = this.addUserForm.value.password;
-    this.userModel.phone = this.addUserForm.value.phone;
-    this.userModel.isOver18 = this.addUserForm.value.isOver18;
-    this.userModel.gender = this.addUserForm.value.gender;
+    this.userModel.firstName = this.dashboardForm.value.firstName;
+    this.userModel.lastName = this.dashboardForm.value.lastName;
+    this.userModel.email = this.dashboardForm.value.email;
+    this.userModel.password = this.dashboardForm.value.password;
+    this.userModel.phone = this.dashboardForm.value.phone;
+    this.userModel.isOver18 = this.dashboardForm.value.isOver18;
+    this.userModel.gender = this.dashboardForm.value.gender;
 
     this.userService.updateUser(this.userModel, this.userModel.id)
     .subscribe(response => {
       let closeBtn = document.getElementById('cancel');
 
-        this.addUserForm.reset();
+        this.dashboardForm.reset();
         closeBtn?.click();
         window.location.reload();
         this.getUserList();

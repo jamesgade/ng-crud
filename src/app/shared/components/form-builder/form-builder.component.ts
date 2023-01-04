@@ -13,6 +13,7 @@ export class FormBuilderComponent {
   @Input() buttonLabel: string;
 
   customForm: FormGroup;
+  isSubmitting: boolean;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -23,15 +24,35 @@ export class FormBuilderComponent {
   createForm = () => {
     const group = this.formBuilder.group({});
     this.fields.forEach((field: any) => {
-      group.addControl(field.name, new FormControl(''));
+      group.addControl(field.name, new FormControl('', this.getValidators(field)));
     })
     return group;
   }
 
   onSubmit = () => {
-    if(this.customForm.valid){
+    console.log(this.customForm)
+    this.isSubmitting = true;
+    
+    if (this.customForm.valid) {
       this.formValue.emit(this.customForm.value);
     }
+  }
+
+  getValidators = (field: any) => {
+    const validators = [];
+    if (field.required) {
+      validators.push(Validators.required);
+    }
+    if (field.minLength) {
+      validators.push(Validators.minLength(field.minLength))
+    }
+    if (field.maxLength) {
+      validators.push(Validators.maxLength(field.maxLength));
+    }
+    if(field.type === 'email'){
+      validators.push(Validators.email);
+    }
+    return validators;
   }
 
 }

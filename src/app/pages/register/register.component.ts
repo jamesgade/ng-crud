@@ -15,27 +15,33 @@ export class RegisterComponent {
     {
       label: 'First Name',
       type: 'text',
-      name: 'firstName'
+      name: 'firstName',
+      required: true
     },
     {
       label: 'Last Name',
       type: 'text',
-      name: 'lastName'
+      name: 'lastName',
+      required: true,
     },
     {
       label: 'Email',
       type: 'email',
-      name: 'email'
+      name: 'email',
+      required: true
     },
     {
       label: 'Password',
       type: 'password',
-      name: 'password'
+      name: 'password',
+      required: true,
+      minLength: 8
     },
     {
       label: 'Phone Number',
       type: 'number',
-      name: 'Phone'
+      name: 'Phone',
+      required: true
     },
     {
       label: 'Is Adult?',
@@ -46,6 +52,7 @@ export class RegisterComponent {
       label: 'Select Gender',
       type: 'radio',
       name: 'gender',
+      required: true,
       options: [
         {
           label: 'Male',
@@ -63,6 +70,7 @@ export class RegisterComponent {
       label: 'Occupation',
       type: 'select',
       name: 'occupation',
+      required: true,
       options: [
         {
           label: 'I am a student',
