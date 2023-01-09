@@ -2,37 +2,56 @@
 
     <div *ngFor="let field of fields" class="form-field">
 
-        <!-- input label -->
-        <label>{{field.label}}</label>
+        <ng-container *ngIf="!field.multipleValues">
 
-        <!-- input type = text, email, password, number -->
-        <input [formControlName]="field.name" [type]="field.type"
-            *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'"
-            class="form-input" [style.border-color]="customForm.controls[field.name].invalid && (isSubmitting || customForm.controls[field.name].touched) ? 'red' : ''">
+            <!-- input label -->
+            <label>{{field.label}}</label>
 
-        <!-- textarea -->
-        <textarea [formControlName]="field.name" *ngIf="field.type === 'textarea'"></textarea>
+            <!-- input type = text, email, password, number -->
+            <input [formControlName]="field.name" [type]="field.type"
+                *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'"
+                class="form-input"
+                [style.border-color]="customForm.controls[field.name].invalid && (isSubmitting || customForm.controls[field.name].touched) ? 'red' : ''">
 
-        <!-- select dropdown -->
-        <select [formControlName]="field.name" *ngIf="field.type === 'select'" class="dropdown">
-            <option value="" disabled selected>Select an option</option>
-            <ng-container *ngFor="let option of field.options">
-                <option [value]="option.label">{{ option.label }}</option>
-            </ng-container>
-        </select>
+            <!-- textarea -->
+            <textarea [formControlName]="field.name" *ngIf="field.type === 'textarea'"></textarea>
 
-        <!-- checkbox -->
-        <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name" class="form-check">
+            <!-- select dropdown -->
+            <select [formControlName]="field.name" *ngIf="field.type === 'select'" class="dropdown">
+                <option value="" disabled selected>Select an option</option>
+                <ng-container *ngFor="let option of field.options">
+                    <option [value]="option.label">{{ option.label }}</option>
+                </ng-container>
+            </select>
 
-        <div *ngIf="field.type === 'radio'">
-            <div class="radios" *ngFor="let option of field.options">
-                <div class="flex">
-                    <label [for]="option.value">{{option.label}}</label>
-                    <input type="radio" [id]="option.value" [name]="field.name" [value]="option.label"
-                        class="form-radio" [formControlName]="field.name">
+            <!-- checkbox -->
+            <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.name" class="form-check">
+
+            <div *ngIf="field.type === 'radio'">
+                <div class="radios" *ngFor="let option of field.options">
+                    <div class="flex">
+                        <label [for]="option.value">{{option.label}}</label>
+                        <input type="radio" [id]="option.value" [name]="field.name" [value]="option.label"
+                            class="form-radio" [formControlName]="field.name">
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
+
+        <!-- dynamic inputs -->
+        <!-- <ng-container *ngIf="field.multipleValues">
+            <h1>Hii: {{customForm.controls[field.name].errors | json}}</h1>
+            <small>{{customForm.controls[field.name].value | json}}</small>
+            <label>{{field.label}}</label>
+            <div [formArrayName]="field.name" *ngFor="let additionalControls of "
+                class="form-field">
+                <label for="phone-{{i}}">{{i !== 0 ? field.multipleValues.label : field.label}} : </label>
+                <input [formControlName]="field.name" [type]="field.type"
+                    *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'password' || field.type === 'number'"
+                    class="form-input">
+                <button *ngIf="i !== 0" (click)="removePhoneNumberField(i)">Remove</button>
+            </div>
+        </ng-container> -->
 
         <!-- validations -->
         <!-- <h6>errors: {{customForm.controls[field.name].errors | json}}</h6> -->
@@ -66,6 +85,20 @@
                 </p>
             </div>
         </div>
+    </div>
+
+    <!-- ADDITIONAL INFO -->
+    <div class="form-field">
+        <div class="additional" *ngFor="let info of additionalInfo.controls; let i = index" formArrayName="additionalInfo">
+            <!-- <div class="form-field"> -->
+                <label>Additional Info</label>
+                <div class="additional-field d-flex">
+                    <input [formControlName]="i" type="text" class="form-input additional-input">
+                    <button (click)="removeInfo(i)" class="button additional-remove-button">Delete</button>
+                </div>
+            <!-- </div> -->
+        </div>
+        <button type="button" (click)="addMoreInfo()" class="button form-button">Add More Info</button>
     </div>
 
     <!-- submit button -->

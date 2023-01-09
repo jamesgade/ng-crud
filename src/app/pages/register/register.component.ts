@@ -73,6 +73,10 @@ export class RegisterComponent {
       required: true,
       options: [
         {
+          label: 'Working Professional',
+          value: 'working-professional'
+        },
+        {
           label: 'I am a student',
           value: 'student'
         },

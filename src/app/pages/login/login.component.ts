@@ -23,8 +23,35 @@ export class LoginComponent {
       type: 'password',
       name: 'password',
       required: true,
-      minLength: 4
-    }
+      minLength: 8
+    },
+    // {
+    //   label: 'Test 01',
+    //   type: 'text',
+    //   name: 'test01',
+    //   required: true,
+    //   multipleValues: {
+    //     label: 'Add another test01'
+    //   }
+    // },
+    // {
+    //   label: 'Test 02',
+    //   type: 'text',
+    //   name: 'test02',
+    //   required: true,
+    //   multipleValues: {
+    //     label: 'Add another test02'
+    //   }
+    // },
+    // {
+    //   multipleValues: {
+    //     name: 'phoneNumber',
+    //     type: 'number',
+    //     required: true,
+    //     label: 'Phone Number',
+    //     addLabel: 'Alternate Phone Number'
+    //   }
+    // }
   ];
 
   constructor(private router: Router, private authService: AuthService) { }
